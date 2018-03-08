@@ -22,7 +22,9 @@ public class BookSearch {
     }
 
     public void doSearch(){
-        System.out.println(bookSearchForm.getTerm());
+        Query q = em.createQuery("SELECT b FROM Book b WHERE b.author = :name");
+        q.setParameter("name", bookSearchForm.getTerm());
+        bookSearchForm.setSearchResult(q.getResultList());
     }
 
 }
